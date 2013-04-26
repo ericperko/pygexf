@@ -524,7 +524,7 @@ class Node :
             
             if self.x and self.y and self.z:
                 #position : <viz:position x="15.783598" y="40.109245" z="0.0"/>
-                positionXML = etree.SubElement(nodeXML, "http://www.gexf.net/1.1draft/viz}position")
+                positionXML = etree.SubElement(nodeXML, "{http://www.gexf.net/1.1draft/viz}position")
                 positionXML.set("x", self.x)
                 positionXML.set("y", self.y)
                 positionXML.set("z", self.z)
