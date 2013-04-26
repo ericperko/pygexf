@@ -150,8 +150,8 @@ class Graph :
         self._edges={}
         self.edges=self._edges
         
-    def addNode(self,id,label,start="",end="",startopen=False,endopen=False,pid="",r="",g="",b="",spells=[]) :
-        self._nodes[str(id)]=Node(self,id,label,start,end,pid,r,g,b,spells,startopen,endopen)
+    def addNode(self,id,label,start="",end="",startopen=False,endopen=False,pid="",r="",g="",b="", x=None, y=None, z=None, spells=[]) :
+        self._nodes[str(id)]=Node(self,id,label,start,end,pid,r,g,b,x,y,z,spells,startopen,endopen)
         return self._nodes[str(id)]
     
     def nodeExists(self,id) :
@@ -466,7 +466,7 @@ class Spells(list):
            
 class Node :
 
-    def __init__(self,graph,id,label,start="",end="",pid="",r="",g="",b="",spells=[],startopen=False,endopen=False) :
+    def __init__(self,graph,id,label,start="",end="",pid="",r="",g="",b="",x=None, y=None, z=None, spells=[],startopen=False,endopen=False) :
         self.id =id 
         self.label=label
         self.start=start
@@ -476,6 +476,7 @@ class Node :
         self.pid=pid
         self._graph=graph
         self.setColor(r,g,b)
+        self.setPosition(x,y,z)
         
         #spells expecting format = [{start:"",end:""},...]
         self.spells= spells
@@ -521,6 +522,13 @@ class Node :
                 colorXML.set("g",self.g)
                 colorXML.set("b",self.b)
             
+            if self.x and self.y and self.z:
+                #position : <viz:position x="15.783598" y="40.109245" z="0.0"/>
+                positionXML = etree.SubElement(nodeXML, "http://www.gexf.net/1.1draft/viz}position")
+                positionXML.set("x", self.x)
+                positionXML.set("y", self.y)
+                positionXML.set("z", self.z)
+
             return nodeXML
         except Exception, e:
             print self.label
@@ -600,6 +608,11 @@ class Node :
         self.r=r
         self.g=g
         self.b=b
+
+    def setPosition(self,x,y,z) :
+        self.x=x
+        self.y=y
+        self.z=z
     
     def __str__(self):
         return self.label
