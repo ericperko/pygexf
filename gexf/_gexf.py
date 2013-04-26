@@ -517,14 +517,14 @@ class Node :
             
             if not self.r=="" and not self.g=="" and not self.b=="" :
                 #color : <viz:color r="239" g="173" b="66"/>
-                colorXML = etree.SubElement(nodeXML, "{http://www.gexf.net/1.1draft/viz}color")
+                colorXML = etree.SubElement(nodeXML, "{http://www.gexf.net/1.2draft/viz}color")
                 colorXML.set("r",self.r)
                 colorXML.set("g",self.g)
                 colorXML.set("b",self.b)
             
             if self.x and self.y and self.z:
                 #position : <viz:position x="15.783598" y="40.109245" z="0.0"/>
-                positionXML = etree.SubElement(nodeXML, "{http://www.gexf.net/1.1draft/viz}position")
+                positionXML = etree.SubElement(nodeXML, "{http://www.gexf.net/1.2draft/viz}position")
                 positionXML.set("x", self.x)
                 positionXML.set("y", self.y)
                 positionXML.set("z", self.z)
