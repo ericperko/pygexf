@@ -562,6 +562,9 @@ class Node :
                 r = ""
                 g = ""
                 b = ""
+		x = ""
+		y = ""
+		z = ""
         
                 for attr in node_xml.attrib :
                     attr = attr.lower()
@@ -590,16 +593,20 @@ class Node :
                     tag = ns_clean(child.tag).lower()
                     if tag == "attvalues" :
                         attvalues_xml.append(child)
-                    if tag == "viz:color" :
+                    if tag == "color" :
                         r = child.attrib["r"]
                         g = child.attrib["g"]
                         b = child.attrib["b"]
+		    if tag == "position" :
+			x = child.attrib["x"]
+			y = child.attrib["y"]
+			z = child.attrib["z"]
                     if tag =="spells" :
                         spells=Spells.importXML(child)
                         
         
                 
-                node_obj = graph_obj.addNode(id=id, label=label, start=start, end=end, startopen=startopen, endopen=endopen, pid=pid, r=r, g=g, b=b,spells=spells)
+                node_obj = graph_obj.addNode(id=id, label=label, start=start, end=end, startopen=startopen, endopen=endopen, pid=pid, r=r, g=g, b=b, x=x, y=y, z=z, spells=spells)
                 node_obj._attributes =graph_obj.attributes.importAttributesValuesXML("node",attvalues_xml) 
             
 
