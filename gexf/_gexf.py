@@ -155,7 +155,7 @@ class Graph :
         return self._nodes[str(id)]
     
     def nodeExists(self,id) :
-        if id in self._nodes.keys():
+        if id in self._nodes:
             return 1
         else :
             return 0
